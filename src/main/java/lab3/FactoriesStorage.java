@@ -3,8 +3,8 @@ package lab3;
 import lab3.factory_initializer.FactoryInitializer;
 import lab3.factory_initializer.StandardFactoryInitializer;
 import lab3.hero_factory.*;
-import lab3.hero_factory.hero_supplier.HeroSupplier;
-import lab3.hero_factory.hero_supplier.LordOfRingsHeroSupplier;
+import lab3.hero_supplier.HeroSupplier;
+import lab3.hero_supplier.LordOfRingsHeroSupplier;
 
 import java.util.List;
 import java.util.Map;

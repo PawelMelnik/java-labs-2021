@@ -1,4 +1,4 @@
-package lab3.hero_factory.hero_supplier;
+package lab3.hero_supplier;
 
 import lab3.hero.*;
 import lab3.hero.at_fight.FightType;
@@ -17,6 +17,7 @@ public class LordOfRingsHeroSupplier implements HeroSupplier {
 
     @Override
     public List<HeroGenerationData> getAllHeroTypes() {
+        //TODO: this can be replaced on reading from file or db for example
         final HeroGenerationData lordOfTheRing =
                 HeroGenerationData.builder()
                         .nameGenerator(()->"Lord of the Ring")
