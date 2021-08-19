@@ -3,12 +3,14 @@ package lab3.hero.at_fight.strategies;
 import lab3.hero.HeroData;
 import lab3.hero.at_fight.FightHeroDataChange;
 import lab3.hero.at_fight.HeroAtFight;
-import lombok.AllArgsConstructor;
 
 import java.util.Random;
 
-@AllArgsConstructor
 public class KingHeroAtFightImpl extends AbstractHeroAtFight {
+
+    public KingHeroAtFightImpl(HeroData heroData) {
+        super(heroData);
+    }
 
     //TODO: can be extracted to parent in some part
     @Override

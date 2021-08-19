@@ -3,7 +3,9 @@ package lab3.hero.at_fight.strategies;
 import lab3.hero.HeroData;
 import lab3.hero.at_fight.FightHeroDataChange;
 import lab3.hero.at_fight.HeroAtFight;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 public abstract class AbstractHeroAtFight implements HeroAtFight {
     HeroData heroData;
 

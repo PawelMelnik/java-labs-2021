@@ -3,10 +3,12 @@ package lab3.hero.at_fight.strategies;
 import lab3.hero.HeroData;
 import lab3.hero.at_fight.FightHeroDataChange;
 import lab3.hero.at_fight.HeroAtFight;
-import lombok.AllArgsConstructor;
 
-@AllArgsConstructor
 public class NorrisHeroAtFightImpl extends AbstractHeroAtFight {
+
+    public NorrisHeroAtFightImpl(HeroData heroData) {
+        super(heroData);
+    }
 
     @Override
     public void kick(HeroAtFight visavi) {
