@@ -1,6 +1,8 @@
 package lab3.hero;
 
 
+import lab3.hero.at_fight.HeroAtFight;
+
 public class HeroImpl implements Hero {
 
     private final HeroData heroData;

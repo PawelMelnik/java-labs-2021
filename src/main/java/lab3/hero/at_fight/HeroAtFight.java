@@ -1,4 +1,4 @@
-package lab3.hero;
+package lab3.hero.at_fight;
 
 public interface HeroAtFight {
     public void kick(HeroAtFight c);

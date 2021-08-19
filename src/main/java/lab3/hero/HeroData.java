@@ -1,5 +1,6 @@
 package lab3.hero;
 
+import lab3.hero.at_fight.FightType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NonNull;
@@ -17,6 +18,8 @@ public class HeroData {
     private Integer hp;
     @NonNull
     private FightType fightType;
+/*  @NonNull
+    private T specificData;*/
 
     public HeroData makeCopy() {
         return HeroData.builder()
@@ -26,5 +29,4 @@ public class HeroData {
                 .fightType(fightType)
                 .build();
     }
-
 }

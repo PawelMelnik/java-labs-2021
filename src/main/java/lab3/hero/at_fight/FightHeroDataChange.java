@@ -1,4 +1,4 @@
-package lab3.hero;
+package lab3.hero.at_fight;
 
 import lombok.Getter;
 

@@ -1,9 +1,13 @@
-package lab3.hero;
+package lab3.hero.at_fight;
 
+import lab3.hero.HeroData;
+import lab3.hero.at_fight.strategies.KingHeroAtFightImpl;
+import lab3.hero.at_fight.strategies.NorrisHeroAtFightImpl;
 import lombok.Getter;
 
 public enum FightType {
-    NORRIS_STYLE(StandardHeroAtFightImpl::new),
+    NORRIS_STYLE(NorrisHeroAtFightImpl::new),
+    KING_STYLE(KingHeroAtFightImpl::new),
     ;
 
     @Getter

@@ -1,7 +1,7 @@
 package lab3;
 
 import lab3.hero.Hero;
-import lab3.hero.HeroAtFight;
+import lab3.hero.at_fight.HeroAtFight;
 
 public class GameManager {
 
