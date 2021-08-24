@@ -25,7 +25,10 @@ public class BadFriday {
 
         yearToBlackFridaysCount.entrySet()
                 .stream()
-                .sorted(Comparator.comparing(Map.Entry<Integer, Long>::getValue).reversed())
+                .sorted(Comparator.comparing(Map.Entry<Integer, Long>::getValue)
+                        .thenComparing(Map.Entry::getKey)
+                        .reversed()
+                )
                 .forEachOrdered(System.out::println); //needed or not?
     }
 }
