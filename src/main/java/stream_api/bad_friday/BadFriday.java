@@ -20,7 +20,6 @@ public class BadFriday {
                 Stream.iterate(start, curDate -> !curDate.isAfter(end), curDate -> curDate.plusMonths(1))
                         .parallel() //does it needed?
                         .filter(curDate -> curDate.getDayOfWeek() == DayOfWeek.FRIDAY)
-                        .peek(date -> System.out.println(date + "" + date.getDayOfWeek()))
                         .collect(Collectors.groupingBy(LocalDate::getYear, Collectors.counting()));
 
         yearToBlackFridaysCount.entrySet()
