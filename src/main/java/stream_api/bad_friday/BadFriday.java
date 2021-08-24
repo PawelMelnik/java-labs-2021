@@ -13,14 +13,14 @@ public class BadFriday {
         //validate
 
         //iterate
-        LocalDate start = LocalDate.of(startYear, 1, 1);
+        LocalDate start = LocalDate.of(startYear, 1, 13);
         LocalDate end = LocalDate.of(endYear, 12, 31);
 
         Map<Integer, Long> yearToBlackFridaysCount =
-                Stream.iterate(start, curDate -> !curDate.isAfter(end), curDate -> curDate.plusDays(1))
+                Stream.iterate(start, curDate -> !curDate.isAfter(end), curDate -> curDate.plusMonths(1))
                         .parallel() //does it needed?
                         .filter(curDate -> curDate.getDayOfWeek() == DayOfWeek.FRIDAY)
-                        .filter(curDate -> curDate.getDayOfMonth() == 13)
+                        .peek(date -> System.out.println(date + "" + date.getDayOfWeek()))
                         .collect(Collectors.groupingBy(LocalDate::getYear, Collectors.counting()));
 
         yearToBlackFridaysCount.entrySet()
