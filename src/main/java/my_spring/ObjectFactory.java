@@ -19,7 +19,7 @@ public class ObjectFactory {
     public <T> T createObject(Class<T> type) {
         T createdObject = createEmptyObject(type);
 
-        T tunedObject = (T)objectTunerPipeline.tuneObject(createdObject);
+        T tunedObject = objectTunerPipeline.tuneObject(createdObject);
 
         return tunedObject;
     }
