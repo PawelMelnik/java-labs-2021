@@ -13,17 +13,17 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @SuppressWarnings("UnnecessaryLocalVariable")
-public class BenchmarkProxyCreator implements ObjectProxyCreator {
+public class BenchmarkObjectChanger implements ObjectChanger {
 
     @Override
-    public <T> T createProxy(T proxiedObject, RealObjectMeta<T> realObjectMeta) {
+    public <T> T changeObject(T objectToChange, RealObjectMeta<T> realObjectMeta) {
         Class<?> realObjectType = realObjectMeta.getObjectWithoutProxies().getClass();
 
         if (isClassOrMethodAnnotatedWithBenchmark(realObjectType)) {
-            return createProxyForBenchmark(proxiedObject, realObjectMeta);
+            return createProxyForBenchmark(objectToChange, realObjectMeta);
         }
 
-        return proxiedObject;
+        return objectToChange;
     }
 
     @SneakyThrows

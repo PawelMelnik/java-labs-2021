@@ -1,25 +1,19 @@
 package my_spring.proxy;
 
 import lombok.SneakyThrows;
-import net.sf.cglib.proxy.Enhancer;
-import net.sf.cglib.proxy.MethodInterceptor;
 
-import javax.naming.OperationNotSupportedException;
-import java.lang.reflect.Modifier;
+import java.lang.reflect.Proxy;
 
-public class DynamicProxyCreator implements ProxyCreator{
+public class DynamicProxyCreator implements ProxyCreator {
 
     @SneakyThrows
     @Override
     public <T> T createProxy(Class<?> realType, ProxyLambda proxyLambda) {
 
-        if (Modifier.isFinal(realType.getModifiers())) {
-            throw new OperationNotSupportedException("Poka ne umeyu final class nasledovat: " + realType.getName());
-        }
-
-        MethodInterceptor handler =
-                (doNotUse, method, args, methodProxy) -> proxyLambda.interceptor(method, args);
-
-        return (T) Enhancer.create(realType, handler);
+        return (T) Proxy.newProxyInstance(
+                realType.getClassLoader(),
+                realType.getInterfaces(),
+                (doNotUse, method, args) -> proxyLambda.interceptor(method, args)
+        );
     }
 }

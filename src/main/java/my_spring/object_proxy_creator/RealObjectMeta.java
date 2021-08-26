@@ -7,6 +7,6 @@ import lombok.Getter;
 @Getter
 public class RealObjectMeta<T> {
     private final T objectWithoutProxies;
-    //TODO: We can pass proxy type instead of desired type
+    //TODO: We can pass proxy type instead of desired type because we know it is always single
     private final Class<T> desiredType;
 }

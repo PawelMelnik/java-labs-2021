@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.SneakyThrows;
 import my_spring.object_configurator_supplier.ObjectConfiguratorSupplier;
 import my_spring.object_configurator_supplier.ReflectionsConfiguratorSupplier;
-import my_spring.object_proxy_creator.ObjectProxyCreator;
+import my_spring.object_proxy_creator.ObjectChanger;
 import my_spring.object_proxy_creator.RealObjectMeta;
 import my_spring.object_proxy_creator_supplier.ReflectionsProxyCreatorSupplier;
 import org.reflections.ReflectionUtils;
@@ -12,7 +12,6 @@ import org.reflections.Reflections;
 
 import javax.annotation.PostConstruct;
 import java.lang.reflect.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -26,7 +25,7 @@ public class ObjectFactory {
     private final Reflections scanner = new Reflections("my_spring");
 
     private final List<ObjectConfigurator> configurators;
-    private final List<ObjectProxyCreator> proxyCreators;
+    private final List<ObjectChanger> proxyCreators;
 
     @SneakyThrows
     public ObjectFactory() {
@@ -73,8 +72,8 @@ public class ObjectFactory {
         //TODO: remove desired type somehow
         final RealObjectMeta<T> realObjectMeta = new RealObjectMeta<>(objectToBeProxied, desiredType);
 
-        for (ObjectProxyCreator proxyCreator : proxyCreators) {
-            proxiedObject = proxyCreator.createProxy(proxiedObject, realObjectMeta);
+        for (ObjectChanger proxyCreator : proxyCreators) {
+            proxiedObject = proxyCreator.changeObject(proxiedObject, realObjectMeta);
         }
 
         return proxiedObject;
