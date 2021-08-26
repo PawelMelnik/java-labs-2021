@@ -24,12 +24,10 @@ public class ApplicationContext implements Context {
         if (cache.containsKey(type)) {
             return (T) cache.get(type);
         }else {
-            //TODO: cash doesnt work for interface+class!
-            T object = ObjectFactory.getInstance().createObject(type);
-            cache.put(type, object);
 
-            return object;
+            //use objectFactory to create object and in case it marked as singleton, cache it as well
         }
+        return null;
     }
 }
 

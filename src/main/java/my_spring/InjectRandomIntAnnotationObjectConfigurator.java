@@ -1,6 +1,6 @@
 package my_spring;
 
-import design_patterns.RandomUtil;
+import homework.lab3.utils.RandomUtil;
 import lombok.SneakyThrows;
 
 import java.lang.reflect.Field;
