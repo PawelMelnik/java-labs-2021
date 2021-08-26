@@ -1,4 +1,4 @@
-package my_spring.object_tuner_pipeline;
+package my_own_spring.object_tuner_pipeline;
 
 import lombok.SneakyThrows;
 import org.reflections.Reflections;

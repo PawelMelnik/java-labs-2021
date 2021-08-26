@@ -1,4 +1,4 @@
-package my_spring;
+package my_own_spring;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

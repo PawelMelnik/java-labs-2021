@@ -1,9 +1,9 @@
-package my_spring.object_tuner_pipeline;
+package my_own_spring.object_tuner_pipeline;
 
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
-import my_spring.InjectByType;
-import my_spring.main_initializer.MainInitializer;
+import my_own_spring.InjectByType;
+import my_own_spring.main_initializer.MainInitializer;
 
 import java.lang.reflect.Field;
 

@@ -1,6 +1,6 @@
-package my_spring;
+package my_own_spring;
 
-import my_spring.main_initializer.MainInitializer;
+import my_own_spring.main_initializer.MainInitializer;
 
 /**
  * @author Evgeny Borisov

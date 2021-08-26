@@ -1,9 +1,8 @@
-package my_spring;
+package my_own_spring;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.SneakyThrows;
-import my_spring.object_tuner_pipeline.ObjectTunerPipeline;
+import my_own_spring.object_tuner_pipeline.ObjectTunerPipeline;
 
 
 /**

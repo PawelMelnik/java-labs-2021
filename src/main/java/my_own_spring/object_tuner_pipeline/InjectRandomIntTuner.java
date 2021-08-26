@@ -1,8 +1,8 @@
-package my_spring.object_tuner_pipeline;
+package my_own_spring.object_tuner_pipeline;
 
 import design_patterns.RandomUtil;
 import lombok.SneakyThrows;
-import my_spring.InjectRandomInt;
+import my_own_spring.InjectRandomInt;
 
 import java.lang.reflect.Field;
 

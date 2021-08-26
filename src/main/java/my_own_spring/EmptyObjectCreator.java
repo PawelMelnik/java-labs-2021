@@ -1,4 +1,4 @@
-package my_spring;
+package my_own_spring;
 
 import lombok.SneakyThrows;
 

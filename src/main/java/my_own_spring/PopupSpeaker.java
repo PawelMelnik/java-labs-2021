@@ -1,6 +1,4 @@
-package my_spring;
-
-import javax.swing.*;
+package my_own_spring;
 
 /**
  * @author Evgeny Borisov

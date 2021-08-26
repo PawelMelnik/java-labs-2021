@@ -1,4 +1,4 @@
-package my_spring;
+package my_own_spring;
 
 import org.reflections.Reflections;
 
@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class ReflectionsConfig implements Config {
 
-    private Reflections scanner = new Reflections("my_spring");
+    private Reflections scanner = new Reflections("my_own_spring");
     private Map<Class, Class> ifc2ImplClass = new HashMap<>();
 
     @Override

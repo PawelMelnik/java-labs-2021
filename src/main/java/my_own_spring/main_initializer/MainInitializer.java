@@ -1,10 +1,10 @@
-package my_spring.main_initializer;
+package my_own_spring.main_initializer;
 
-import my_spring.EmptyObjectCreator;
-import my_spring.ObjectFactory;
-import my_spring.object_tuner_pipeline.ObjectTunerPipeline;
-import my_spring.object_tuner_pipeline.ObjectTunerSupplier;
-import my_spring.object_tuner_pipeline.ScannerObjectTunerSupplier;
+import my_own_spring.EmptyObjectCreator;
+import my_own_spring.ObjectFactory;
+import my_own_spring.object_tuner_pipeline.ObjectTunerPipeline;
+import my_own_spring.object_tuner_pipeline.ObjectTunerSupplier;
+import my_own_spring.object_tuner_pipeline.ScannerObjectTunerSupplier;
 
 //TODO: remove initialize()
 public class MainInitializer {
