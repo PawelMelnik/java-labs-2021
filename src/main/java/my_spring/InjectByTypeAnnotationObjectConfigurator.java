@@ -9,8 +9,6 @@ import java.lang.reflect.Field;
  */
 public class InjectByTypeAnnotationObjectConfigurator implements ObjectConfigurator {
 
-
-
     @Override
     @SneakyThrows
     public void configure(Object t) {

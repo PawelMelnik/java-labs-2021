@@ -2,6 +2,11 @@ package my_spring;
 
 import lombok.Getter;
 import lombok.SneakyThrows;
+import my_spring.object_configurator_supplier.ObjectConfiguratorSupplier;
+import my_spring.object_configurator_supplier.ReflectionsConfiguratorSupplier;
+import my_spring.object_proxy_creator.ObjectProxyCreator;
+import my_spring.object_proxy_creator.RealObjectMeta;
+import my_spring.object_proxy_creator_supplier.ReflectionsProxyCreatorSupplier;
 import org.reflections.ReflectionUtils;
 import org.reflections.Reflections;
 
@@ -16,61 +21,36 @@ import java.util.Set;
  */
 public class ObjectFactory {
     @Getter
-    private static ObjectFactory instance = new ObjectFactory();
-    private Config config = new JavaConfig();
-    private Reflections scanner = new Reflections("my_spring");
+    private static final ObjectFactory instance = new ObjectFactory();
+    private final Config config = new JavaConfig();
+    private final Reflections scanner = new Reflections("my_spring");
 
-    private List<ObjectConfigurator> configurators = new ArrayList<>();
+    private final List<ObjectConfigurator> configurators;
+    private final List<ObjectProxyCreator> proxyCreators;
 
     @SneakyThrows
     public ObjectFactory() {
-        Set<Class<? extends ObjectConfigurator>> classes = scanner.getSubTypesOf(ObjectConfigurator.class);
-        for (Class<? extends ObjectConfigurator> aClass : classes) {
-            if (!Modifier.isAbstract(aClass.getModifiers())) {
-                configurators.add(aClass.getDeclaredConstructor().newInstance());
-            }
-        }
+        ObjectConfiguratorSupplier objectConfiguratorSupplier = new ReflectionsConfiguratorSupplier("my_spring");
+        ReflectionsProxyCreatorSupplier proxyCreatorSupplier = new ReflectionsProxyCreatorSupplier("my_spring");
+
+        this.configurators = objectConfiguratorSupplier.collectConfigurators();
+        this.proxyCreators = proxyCreatorSupplier.collectSuppliers();
     }
 
-
-
-
     @SneakyThrows
-    public <T> T createObject(Class<T> type) {
+    public <T> T createObject(Class<T> desiredType) {
 
-        type = resolveImple(type);
+        Class<T> implType = resolveImple(desiredType);
 
-        T t = type.getDeclaredConstructor().newInstance();
+        T t = implType.getDeclaredConstructor().newInstance();
 
         configure(t);
 
-        invokeInit(type, t);
+        invokeInit(implType, t);
 
-        if (type.isAnnotationPresent(Benchmark.class)) {
-            return (T) Proxy.newProxyInstance(type.getClassLoader()
-                    , type.getInterfaces()
-                    , new InvocationHandler() {
-                        @Override
-                        public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        final T proxiedObject = createProxies(t, desiredType);
 
-                            System.out.println("********BENCHMARK STARTED FOR METHOD " + method.getName() + " **********");
-                            long start = System.nanoTime();
-                            Object retVal = method.invoke(t, args);
-                            long end = System.nanoTime();
-                            System.out.println(end - start);
-
-                            System.out.println("********BENCHMARK ENDED FOR METHOD " + method.getName() + " **********");
-
-
-                            return retVal;
-                        }
-                    }
-
-
-            );
-        }
-
-        return t;
+        return proxiedObject;
     }
 
 
@@ -85,6 +65,19 @@ public class ObjectFactory {
 
     private <T> void configure(T t) {
         configurators.forEach(configurator -> configurator.configure(t));
+    }
+
+    private <T> T createProxies(final T objectToBeProxied, final Class<T> desiredType) {
+
+        T proxiedObject = objectToBeProxied;
+        //TODO: remove desired type somehow
+        final RealObjectMeta<T> realObjectMeta = new RealObjectMeta<>(objectToBeProxied, desiredType);
+
+        for (ObjectProxyCreator proxyCreator : proxyCreators) {
+            proxiedObject = proxyCreator.createProxy(proxiedObject, realObjectMeta);
+        }
+
+        return proxiedObject;
     }
 
     private <T> Class<T> resolveImple(Class<T> type) {
