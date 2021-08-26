@@ -1,5 +1,6 @@
 package my_spring;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.SneakyThrows;
 import my_spring.object_tuner_pipeline.ObjectTunerPipeline;
@@ -8,28 +9,17 @@ import my_spring.object_tuner_pipeline.ObjectTunerPipeline;
 /**
  * @author Evgeny Borisov
  */
+@AllArgsConstructor
 public class ObjectFactory {
-    @Getter
-    private static ObjectFactory instance = new ObjectFactory();
-    private Config config = new JavaConfig();
-    //TODO: tuners will be injected
-    private static final ObjectTunerPipeline objectTunerPipeline = new ObjectTunerPipeline();
+    private final ObjectTunerPipeline objectTunerPipeline;
+    private final EmptyObjectCreator emptyObjectCreator;
 
     @SneakyThrows
     public <T> T createObject(Class<T> type) {
-        T createdObject = createEmptyObject(type);
+        T createdObject = emptyObjectCreator.createEmptyObject(type);
 
         T tunedObject = objectTunerPipeline.tuneObject(createdObject);
 
         return tunedObject;
-    }
-
-    @SneakyThrows
-    private <T> T createEmptyObject(Class<T> type) {
-        if (type.isInterface()) {
-            type = config.getImplClass(type);
-        }
-
-        return type.getDeclaredConstructor().newInstance();
     }
 }

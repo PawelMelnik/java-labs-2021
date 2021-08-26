@@ -1,11 +1,13 @@
 package my_spring.object_tuner_pipeline;
 
+import lombok.AllArgsConstructor;
+
 import java.util.List;
 
+@AllArgsConstructor
 public class ObjectTunerPipeline {
 
-    //TODO: replace by supplier class
-    private final List<ObjectTuner> objectTuners= List.of(new InjectRandomIntTuner(), new InjectByTypeTuner());
+    private final List<ObjectTuner> objectTuners;
 
     public <T> T tuneObject(T objectToTune) {
 
